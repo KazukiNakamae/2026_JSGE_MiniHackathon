@@ -1,22 +1,22 @@
-# H · AAV cassette annotation and WGS variant review
+# H｜AAVカセットの注釈とWGS変異の照合
 
-**Mode:** Coding agent · **Target:** one cassette size chart or one coordinate-join table.
+**進め方：** コーディングエージェント　**成果物：** カセットのサイズ比較図か、ゲノム座標で変異を照合した表
 
-## Public data
+## 使う公開データ
 
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [McIntosh et al. and supplement](https://pmc.ncbi.nlm.nih.gov/articles/PMC3637010/) | Published shortened FVIII cassettes | Core cassette annotations |
-| [RefSeq F8 NM_000132.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000132.4) and [RefSeq F9 NM_000133.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000133.4) | Versioned coding references | Sequence lengths and numbering |
-| [FIX-Padua study](https://pubmed.ncbi.nlm.nih.gov/31219805/) and [Bryant et al. AAV2 data](https://github.com/alibashir/aav) | Published activity panels and capsid packaging assay results | Alternative protein and capsid analyses |
-| [Peterson et al., Supplementary Data 1, 3 and 5](https://doi.org/10.1038/s42003-023-04974-0) | Candidate sites, variant calls and figure data | Core WGS comparison |
-| [NCBI BioProject PRJNA687003](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA687003) and [EVA PRJEB61387](https://www.ebi.ac.uk/eva/?eva-study=PRJEB61387) | Raw WGS/CIRCLE-seq and primary-filtered VCFs | Archival and follow-up inputs |
+| [McIntoshらの論文と補足資料](https://pmc.ncbi.nlm.nih.gov/articles/PMC3637010/) | 報告済みの短縮型FVIIIカセット | カセット各要素の注釈 |
+| [RefSeq F8 NM_000132.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000132.4)・[RefSeq F9 NM_000133.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000133.4) | バージョンを指定した参照配列 | コード領域の長さと位置番号 |
+| [FIX-Paduaの研究](https://pubmed.ncbi.nlm.nih.gov/31219805/)・[BryantらのAAV2データ](https://github.com/alibashir/aav) | 活性の図とカプシドのpackaging測定値 | タンパク質やカプシドを選ぶ場合に使用 |
+| [PetersonらのSupplementary Data 1、3、5](https://doi.org/10.1038/s42003-023-04974-0) | 予測候補座位、変異コール、図の元データ | WGSでの照合 |
+| [NCBI BioProject PRJNA687003](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA687003)・[EVA PRJEB61387](https://www.ebi.ac.uk/eva/?eva-study=PRJEB61387) | WGS・CIRCLE-seqの元リードと一次フィルタ済みVCF | データの登録先と発展解析 |
 
-## Choose one exercise
+## カセット注釈かWGSを選ぶ
 
-- **AAV/FVIII:** Annotate one published FVIII cassette. Plot the reported lengths of the ITRs, regulatory elements and coding sequence. Add a full-length F8 coding reference for scale, label it as a coding sequence, and mark elements with unresolved lengths. Extensions include comparing published FIX-Padua activity by FVIIIa condition or plotting the relationship between AAV2 sequence change and measured packaging performance.
-- **Editing/WGS:** Select one published guide or founder. Join predicted sites with reported WGS variant calls in the paper's mm10 assembly. Keep the intended target, predicted off-target sites with a matched call, and sites with unresolved status in separate categories. Inspect the authors' comparison with untreated animals where available. Record the interval definition and VCF/BED coordinate conventions.
+- **AAV・FVIII**　報告済みのFVIIIカセットを一つ選び、ITR、発現調節配列、コード領域の長さを図にします。比較用に全長F8のコード領域を添え、長さが分からない要素にはその旨を記載します。発展課題では、FIX-Paduaの活性をFVIIIaの有無で比較するか、AAV2の配列の違いとpackagingの実測値の関係を描きます。
+- **ゲノム編集・WGS**　論文のガイド1本かfounder 1個体を選び、mm10上で予測座位とWGSの変異コールを照合します。意図した標的、変異コールが一致した予測off-target座位、判定がつかない座位を分けます。照合に使った座標範囲とVCF・BEDの座標の数え方を記録し、利用できる場合は未処置群との比較も確認します。
 
-**Agent prompt**
+**プロンプト例**
 
-> Show me the source rows, the units or coordinate system, and any missing fields. Then generate the selected chart or join table and manually verify one element or variant against the published record.
+> 元の行、単位か座標系、不足している項目を先に示してください。選んだ課題の図か表を作り、カセットの要素か変異を一つ選んで論文の記録と照合してください。

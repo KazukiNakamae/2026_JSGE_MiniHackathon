@@ -1,27 +1,25 @@
-# F · Cre recognition specificity and model transfer
+# F｜Creの配列認識と予測モデルの他生物への転用
 
-**Mode:** Coding agent · **Target:** a focused recreation of a recognition profile.
+**進め方：** コーディングエージェント　**成果物：** Creの配列認識プロファイルの再現図
 
-## Question
+野生型CreとCre R259Aは、認識配列のどの位置で違うでしょうか。[BessenらのFigure 2b](https://doi.org/10.1038/s41467-019-09987-0)を、公開されたRec-seqの濃縮度から描き直します。
 
-At which recognition positions do wild-type Cre and Cre R259A differ? Recreate the enrichment profile in [Bessen et al., Figure 2b](https://doi.org/10.1038/s41467-019-09987-0) from the published Rec-seq values.
+## 使う公開データ
 
-## Public data
-
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [Bessen et al. Source Data](https://www.nature.com/articles/s41467-019-09987-0) | Source Data for Figure 2b | Core enrichment profiles |
-| [NCBI BioProject PRJNA517947](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA517947) | Rec-seq reads | Original sequencing archive |
-| [Zebrafish comparison, Supplementary Table 3](https://doi.org/10.1186/s12864-021-08238-1) and [ENA PRJEB39643](https://www.ebi.ac.uk/ena/browser/view/PRJEB39643) | Candidate-count summaries and underlying CIRCLE-seq reads | Alternative to examine cross-species transfer |
+| [BessenらのSource Data](https://www.nature.com/articles/s41467-019-09987-0) | Figure 2bの元データ | 濃縮度プロファイルの再現 |
+| [NCBI BioProject PRJNA517947](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA517947) | Rec-seqの元リード | シーケンスデータの登録先 |
+| [ゼブラフィッシュの比較研究の補足表3](https://doi.org/10.1186/s12864-021-08238-1)・[ENA PRJEB39643](https://www.ebi.ac.uk/ena/browser/view/PRJEB39643) | ガイド別の候補数とCIRCLE-seqの元リード | 他生物への転用を検討する場合に使用 |
 
-## Core exercise
+## 野生型CreとR259Aの濃縮度を重ねる
 
-1. Locate the Figure 2b values in the source file. Record position labels, direction, and enrichment units.
-2. Plot both profiles on the same axes and mark the position with the largest observed difference in the plotted range. Trace two plotted values to the source.
-3. Report what the enrichment profile says about recognition at those positions. Record any separate activity measurements as a different endpoint.
+1. Source DataからFigure 2bの値を探し、位置の番号、配列の向き、濃縮度の単位を確認します。
+2. 二つのプロファイルを重ねます。図の範囲で差が最も大きい位置に印を付け、描いた値を二つ、元の表までたどります。
+3. その位置でどの塩基の認識に違いが見えるかを記録します。別に測定した活性値があれば、濃縮度とは別の指標として扱います。
 
-**Agent prompt**
+**プロンプト例**
 
-> Inspect the Figure 2b source sheet, convert it to a tidy table, recreate the two lines, and show the original cells for the two positions you highlight.
+> Figure 2bの元データを確認し、1行が1つの測定値になる形に整えてください。二つのプロファイルを重ねて、注目した二つの位置について元のセルを示してください。
 
-**Transfer alternative:** Reproduce the per-guide CRISPRScan versus CIRCLE-seq count plot in zebrafish Figure 3A. The summary counts support a coverage comparison. To evaluate transfer or fine-tuning, prepare per-site labels from a comparable assay and hold out entire guides. Start with the frozen baseline in [B](B.md) and compare any recalibration on the same held-out guides.
+**他生物への転用を選ぶ場合**　ゼブラフィッシュのFigure 3Aに沿って、ガイド別の候補数を比べます。比較するのはCRISPRScanとCIRCLE-seqです。モデルの転用やfine-tuningを評価する場合は、比較できる測定法で得た部位別のラベルを用意します。[B](B.md)の既存モデルを追加学習せずに使った結果と、対象種のデータで調整した結果を、学習から外した同じガイドで比べます。

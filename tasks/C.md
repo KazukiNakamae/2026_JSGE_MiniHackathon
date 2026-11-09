@@ -1,27 +1,25 @@
-# C · AAV integration sites and counting bias
+# C｜AAV挿入座位を数え、PCRによる偏りを考える
 
-**Mode:** Coding agent · **Target:** an integration-count plot and a small counting-bias example.
+**進め方：** コーディングエージェント　**成果物：** 挿入座位の集計図と、カウントの偏りを示す模擬例
 
-## Question
+挿入座位、リード、投入ゲノムのどれを数えるかで、結果の読み方が変わります。[ITR-seqの研究](https://pmc.ncbi.nlm.nih.gov/articles/PMC10659022/)が報告した重複のない挿入座位（unique integration loci、UILs）を集計します。
 
-How does the interpretation change when the unit is an integration locus, a read, or an input genome? Use the reported unique integration loci (UILs) in the [ITR-seq study](https://pmc.ncbi.nlm.nih.gov/articles/PMC10659022/).
+## 使う公開データ
 
-## Public data
-
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [ITR-seq study and public supplements](https://pmc.ncbi.nlm.nih.gov/articles/PMC10659022/) | Table 1, Figure 1A and `Supp_DataS1.xlsx` | Published counts and, when the fields are available, a sample-level or locus-level extension |
-| [Penn-GTP ITR-seq pipeline](https://github.com/Penn-GTP/ITR_Seq2_public) | ITR-seq v2 public repository | Definitions and upstream pipeline |
-| [ProteomeXchange PXD044049](https://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD044049) and [Synapse syn52256996](https://www.synapse.org/Synapse:syn52256996) | EGF phosphoproteomics archive and processed MCF10A time series | Alternative for phosphoproteomics |
+| [ITR-seq論文と補足資料](https://pmc.ncbi.nlm.nih.gov/articles/PMC10659022/) | Table 1、Figure 1A、`Supp_DataS1.xlsx` | 論文の集計値。必要な列があればサンプル別・座位別にも集計 |
+| [Penn-GTPのITR-seqパイプライン](https://github.com/Penn-GTP/ITR_Seq2_public) | ITR-seq v2の公開リポジトリ | 用語と上流の解析手順 |
+| [ProteomeXchange PXD044049](https://proteomecentral.proteomexchange.org/cgi/GetDataset?ID=PXD044049)・[Synapse syn52256996](https://www.synapse.org/Synapse:syn52256996) | EGFリン酸化プロテオームのアーカイブと、MCF10Aの処理済み時系列 | リン酸化プロテオームを選ぶ場合に使用 |
 
-## Core exercise
+## 論文の挿入座位数を描き、模擬データで数え方を試す
 
-1. Extract the recombinant AAV and wild-type AAV macaque summaries from Table 1. Make a dot plot of the group means for unique loci per 100 input genomes reported with Figure 1A. Keep the original groups, units, and sample denominators. If the supplement provides sample-level values, make a compact version of Figure 1A. If chromosome and locus are available, add a per-chromosome count for one cohort.
-2. Make a clearly labeled synthetic table with equal input molecule counts at two loci. Add excess duplicate reads at one locus and missed recovery at the other in separate scenarios. Compare counts by read, recovered molecule, and unique site.
-3. Save the public-data plot and synthetic example separately. Report which denominator is documented for each output.
+1. Table 1から、組換えAAV群と野生型AAV群のマカクの集計値を拾います。Figure 1Aとともに報告された、投入ゲノム100個あたりの挿入座位数の群平均を点で描きます。論文の群名、単位、各群のサンプル数を図に添えます。補足資料にサンプル別の値があればFigure 1Aの一部を再現し、染色体と座位が分かれば1群について染色体別に集計します。
+2. 二つの座位で投入分子数が等しい模擬データを作ります。一方の座位で重複リードが増える場合と、もう一方の座位で検出漏れが起きる場合を個別に試します。リード数、回収した分子数、検出した座位数を比べます。
+3. 公開データの図と模擬データの結果を別々に保存し、それぞれの分母を記録します。
 
-**Agent prompt**
+**プロンプト例**
 
-> Inspect the public table and explain every counting unit. Extract the reported values with a source column, plot them, and create a separate synthetic example that illustrates duplicate reads and missing recovery.
+> 論文の表を読み、何を1件と数えているか整理してください。出典が分かる列を付けて報告値を抽出し、図を作ってください。重複リードと検出漏れの影響を示す模擬データは別に作ってください。
 
-**Alternatives:** Use [B](B.md) for nuclease off-target data. For phosphoproteomics, plot three to five measured EGFR–MAPK phosphosites over time from the processed EGF table and preserve missing values.
+**別の題材**　ヌクレアーゼのoff-targetは[B](B.md)へ。リン酸化プロテオームを選ぶ場合は、EGFR–MAPK経路のリン酸化部位を3〜5か所選んで時間変化を描きます。欠測値は欠測のまま残します。

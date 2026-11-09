@@ -1,28 +1,26 @@
-# B · Off-target candidate coverage and ranking
+# B｜Off-target候補の検出範囲と順位を比べる
 
-**Mode:** Coding agent · **Target:** a per-guide coverage and top-20 recovery table.
+**進め方：** コーディングエージェント　**成果物：** ガイドごとの検出済み部位の回収数と、上位20件に入った数の比較表
 
-## Question
+検索ツールは、実際に検出された部位を何件拾うでしょうか。同じ候補に別のスコアを付けると、その部位の順位はどう変わるでしょうか。[Haeusslerらの補足表2](https://doi.org/10.1186/S13059-016-1012-2)を手本に調べます。
 
-How many observed sites does each search recover, and how much does scoring change the rank of those sites? Adapt the candidate comparison in [Haeussler et al., Supplementary Table 2](https://doi.org/10.1186/S13059-016-1012-2).
+## 使う公開データ
 
-## Public data
-
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [CRISPOR paper repository](https://github.com/maximilianh/crisporPaper) | `offtargets.tsv` and the README entry for `compareOfftargetTools.py` | Curated assay detections and original comparison inputs |
-| [NCBI GEO GSE61586](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE61586) | Tsai et al. GUIDE-seq records | Provenance for the selected GUIDE-seq detections |
-| [UCSC hg19 reference](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/) | Reference sequence for the historical comparison | Coordinate and sequence checks |
-| [MOFF](https://github.com/MDhewei/MOFF) | Published score implementation | Rank ungapped guide–target pairs |
+| [CRISPOR論文のリポジトリ](https://github.com/maximilianh/crisporPaper) | `offtargets.tsv` と、READMEの `compareOfftargetTools.py` の説明 | 検出部位を整理した表と、論文のツール比較に使った入力 |
+| [NCBI GEO GSE61586](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE61586) | TsaiらのGUIDE-seq | 検出部位の出典 |
+| [UCSC hg19 reference](https://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/) | 当時の比較に使った参照ゲノム | 座標と配列の照合 |
+| [MOFF](https://github.com/MDhewei/MOFF) | 公開スコア実装 | gapのないガイドと候補配列の組を採点 |
 
-## Core exercise
+## 候補検索とスコアの順位付けを分けて比べる
 
-1. Select two Tsai GUIDE-seq guides with curated detections. Prefer the author's tool-output tables if available. If rerunning the tools, use the same assembly, PAM, mismatch limit and bulge policy for both tools, then record versions and settings.
-2. Match by guide, chromosome, strand and a consistently defined site coordinate. Spot-check a match by sequence. Report eligible observed sites, recovered sites per tool, and any observed sites excluded by the common search rules.
-3. Rank the same ungapped candidate set by mismatch count, CFD, and MOFF. Record the tie rule, score direction, candidate count, and how many observed sites appear in the first 20 for each ranking.
+1. TsaiらのGUIDE-seqで検出部位が整理されているガイドを2本選びます。入手できる場合は、著者が公開したツール出力を使います。ツールを再実行する場合は、Cas-OFFinderとCRISPORの参照ゲノム、PAM、ミスマッチ数の上限、bulgeを許すかどうかをそろえ、バージョンと設定を記録します。
+2. ガイド、染色体、鎖、部位の座標をそろえて照合し、少なくとも1件を配列でも確認します。検索条件に入る既知部位の数、各ツールが拾った数、検索条件から外れた既知部位を記録します。
+3. gapのない同じ候補集合を、ミスマッチ数、CFD、MOFFでそれぞれ並べます。順位の向きと同点の扱いを決め、候補総数と上位20件に入った既知部位の数を表にします。
 
-**Agent prompt**
+**プロンプト例**
 
-> Audit the guide IDs, assembly, coordinate convention, and scoring columns. Write a join I can inspect and a per-guide table that separates enumeration coverage from ranking. Print one matched and one unmatched example with their source rows.
+> ガイドID、参照ゲノム、座標の定義、スコア列を確認してください。照合のコードを書き、候補検索と順位付けの結果をガイド別に集計してください。一致した例と一致しなかった例を1件ずつ、元の行と一緒に示してください。
 
-**Extension:** If a dataset has independently assayed sites and suitable negative labels, fit a simple baseline and split train and evaluation sets by guide sequence. Treat GUIDE-seq non-detections as unlabeled and check whether the published model trained on the evaluation guides.
+**発展課題**　独立した測定で適切な陰性ラベルが得られる場合は、簡単なモデルを作ります。ガイド配列単位で学習用と評価用に分け、既存モデルの学習データと評価対象のガイドに重複がないか確認します。GUIDE-seqの未検出部位はラベルなしとして扱います。

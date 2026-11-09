@@ -1,21 +1,21 @@
-# I · Guide RNA structure and Cas9 activity
+# I｜ガイドRNAの構造とCas9の活性を比べる
 
-**Mode:** Coding agent · **Target:** one structure–activity comparison table or one Cas9 activity plot.
+**進め方：** コーディングエージェント　**成果物：** 構造と活性の比較表か、Cas9変異体の活性を示す散布図
 
-## Public data
+## 使う公開データ
 
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [Bush et al. BLADE article and supplementary data](https://pmc.ncbi.nlm.nih.gov/articles/PMC10529641/) | Reported scaffold sequences and GFP-knockout results, including the Data S2 reference | Core guide scaffold comparison |
-| [ViennaRNA RNAfold documentation](https://www.tbi.univie.ac.at/RNA/RNAfold.1.html) | RNA secondary-structure predictor | Fold identical-spacer guide pairs with recorded settings |
-| [Spencer and Zhang, Cas9 deep mutational scanning](https://doi.org/10.1038/s41598-017-17081-y) | Published single-mutant activity panels | Cas9 alternative using matched and mismatched targets |
+| [BushらのBLADE論文と補足データ](https://pmc.ncbi.nlm.nih.gov/articles/PMC10529641/) | 報告済みのscaffold配列とGFP knockoutの結果（Data S2も参照） | ガイドRNAのscaffoldを比較 |
+| [ViennaRNAのRNAfoldマニュアル](https://www.tbi.univie.ac.at/RNA/RNAfold.1.html) | RNA二次構造の予測ツール | 同じspacerを持つガイドを、設定を記録して比較 |
+| [SpencerとZhangのCas9 deep mutational scanning](https://doi.org/10.1038/s41598-017-17081-y) | 単一変異体の活性を示した論文図 | 一致標的とミスマッチ標的でCas9変異体の活性を比較 |
 
-## Choose one exercise
+## ガイドRNAかCas9変異体を選ぶ
 
-- **Guide scaffold:** Select a wild-type scaffold and two reported variants tested with the same spacer and assay conditions. Fold each complete guide with RNAfold. Compare the predicted structures and energies alongside the published GFP-knockout readout. Include the assay, target, and source panel for each row.
-- **Cas9 protein:** Select wild type and a few reported single substitutions tested with the same target pair. Plot activity on the matched target against activity on the mismatched target, using the reported units and assay conditions. If the numbers are read from a figure, label them as digitized and record the panel.
-- **Spacer extension:** Use [B](B.md) to assess the effect of spacer–target mismatches with the scaffold held constant.
+- **ガイドRNAのscaffold**　同じspacerと測定条件で比較された野生型scaffoldと変異型2種類を選びます。ガイドRNA全体の二次構造をRNAfoldで予測します。予測構造とエネルギーを、論文にあるGFP knockoutの測定値と並べます。測定条件、標的、出典のパネル番号も記録します。
+- **Cas9のアミノ酸置換**　同じ標的の組で測定された野生型と単一置換変異体を数種類選びます。一致標的の活性とミスマッチ標的の活性を散布図の二軸に置き、論文の単位と測定条件を添えます。図から数値を読み取った場合は、その旨とパネル番号を記録します。
+- **spacerを変える場合**　scaffoldをそろえた条件で、[B](B.md)の方法を使ってspacerと標的のミスマッチの影響を調べます。
 
-**Agent prompt**
+**プロンプト例**
 
-> Verify that the variants share the stated spacer or target pair and assay context. Build a source-linked table, run the selected computation, and label measured and predicted quantities separately.
+> 変異体の比較に使うspacerか標的の組と、測定条件がそろっているか確認してください。出典付きの比較表を作り、選んだ解析を実行してください。実測値と予測値にはそれぞれラベルを付けてください。

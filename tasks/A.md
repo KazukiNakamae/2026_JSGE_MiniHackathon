@@ -1,29 +1,27 @@
-# A · Gene expression in a mouse disease model
+# A｜疾患モデルマウスの遺伝子発現を比べる
 
-**Mode:** Coding agent · **Target:** one normalized expression plot and a small differential-expression table.
+**進め方：** コーディングエージェント　**成果物：** 正規化した発現量の図と、差次的発現の結果表
 
-## Question
+5xFADマウスの海馬では、同じ月齢・性別の野生型と比べて、どの遺伝子の発現が変わるでしょうか。[Fornerらの研究](https://www.nature.com/articles/s41597-021-01054-y)のカウント表から、比較を一つ選んで解析します。
 
-Which genes change between 5xFAD and wild-type mice in one matched hippocampus comparison? Reanalyze the count matrix from [Forner et al.](https://www.nature.com/articles/s41597-021-01054-y) using one age, sex, and brain region.
+## 使う公開データ
 
-## Public data
-
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [NCBI GEO GSE168137](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168137) | `GSE168137_countList.txt.gz` and GEO sample annotations | Core count matrix and group assignments |
-| [NCBI GEO GSE143758](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE143758) | Habib et al. hippocampal single-nucleus RNA-seq | Extension using annotated astrocyte nuclei |
+| [NCBI GEO GSE168137](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE168137) | `GSE168137_countList.txt.gz` とGEOのサンプル情報 | カウント表と群分け |
+| [NCBI GEO GSE143758](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE143758) | Habibらの海馬の単一核RNA-seq | 発展課題で使う、細胞型を注釈した核のデータ |
 
-## Core exercise
+## 8か月齢の雌マウスの海馬を比べる
 
-1. Select eight-month-old female hippocampus samples. Match count columns to GEO metadata and record the actual sample count per genotype. Resolve mismatches before analysis.
-2. Use integer counts with DESeq2 and the design `~ genotype`. Record the direction as 5xFAD over wild type and keep one biological replicate per mouse for this tissue comparison.
-3. Plot normalized expression for a few genes with individual mice visible. Save a table with gene ID, log2 fold change, adjusted p value, and sample counts. Trace one plotted value and one sample label to the input.
+1. 8か月齢の雌マウスの海馬サンプルを選びます。カウント表の列をGEOのサンプル情報と照合し、5xFADと野生型それぞれのサンプル数を記録します。対応が確認できてから解析に進みます。
+2. 整数のカウントを使い、DESeq2で `~ genotype` のモデルを当てます。マウス1匹を生物学的反復1つとし、log2 fold changeは野生型に対する5xFADの変化として求めます。
+3. 数遺伝子の正規化発現量を、マウスごとの値が見える図にします。遺伝子ID、log2 fold change、補正済みp値、各群のサンプル数を表に保存します。図の点を一つ選び、値とサンプル名を入力データまでたどります。
 
-**Agent prompt**
+**プロンプト例**
 
-> Inspect the count table and GEO sample metadata. Show me the selected sample IDs and genotype assignments before fitting the model. Then write one reproducible R script that produces the plot and table for the matched hippocampus comparison.
+> カウント表とGEOのサンプル情報を確認し、選んだサンプルIDと遺伝型の対応を先に示してください。条件をそろえた海馬の比較について、図と表を出力する再実行可能なRスクリプトを一つ作ってください。
 
-## Extensions
+## 発展課題
 
-- For single-nucleus analysis, use an annotated subset of GSE143758 and plot the fraction of disease-associated astrocytes per mouse. For a spatial alternative, use the public mouse-brain dataset in [D](D.md).
-- For guide design, inspect one public mouse locus in [BE-Designer](https://doi.org/10.1186/s12859-018-2585-4). Record the PAM, editing window, and possible bystander bases, then use the candidate-search workflow in [B](B.md).
+- 単一核RNA-seqでは、GSE143758から細胞型を注釈したデータを使い、疾患関連アストロサイトの割合をマウスごとに描きます。空間解析は[Dのマウス脳データ](D.md)を使えます。
+- ガイド設計では、[BE-Designer](https://doi.org/10.1186/s12859-018-2585-4)でマウスの公開座位を一つ調べます。PAM、編集窓、意図した塩基と一緒に変わり得る塩基を記録し、[Bの候補検索](B.md)に進みます。

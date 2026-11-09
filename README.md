@@ -1,30 +1,28 @@
-# 2026 JSGE Mini Hackathon
+# 2026 JSGE ミニバイオハッカソン
 
-Choose one analysis question and bring one plot or table to the 17:00 check-in. Each brief identifies a published result, the public inputs for a small analysis, and a concrete stopping point.
+下の表から、取り組む課題を一つ選びます。17:00の共有までに図か表を一つ作ってください。各ページで論文、公開データの取得先、当日の手順を確認できます。
 
-| Track | Brief | Working mode |
+| 課題 | テーマ | 使うもの |
 | --- | --- | --- |
-| A | [Gene expression in a mouse disease model](tasks/A.md) | Coding agent |
-| B | [Off-target candidate coverage and ranking](tasks/B.md) | Coding agent |
-| C | [AAV integration sites and counting bias](tasks/C.md) | Coding agent |
-| D | [TAL1 regulatory predictions](tasks/D.md) | Browser |
-| E | [Single-cell genotype and protein phenotype](tasks/E.md) | Browser and spreadsheet |
-| F | [Cre recognition specificity and model transfer](tasks/F.md) | Coding agent |
-| G | [Tet-On expression over time](tasks/G.md) | Coding agent |
-| H | [AAV cassette annotation and WGS variant review](tasks/H.md) | Coding agent |
-| I | [Guide RNA structure and Cas9 activity](tasks/I.md) | Coding agent |
+| A | [疾患モデルマウスの遺伝子発現を比べる](tasks/A.md) | コーディングエージェント |
+| B | [Off-target候補の検出範囲と順位を比べる](tasks/B.md) | コーディングエージェント |
+| C | [AAV挿入座位を数え、PCRによる偏りを考える](tasks/C.md) | コーディングエージェント |
+| D | [TAL1周辺の発現とクロマチンの予測を読む](tasks/D.md) | ブラウザ |
+| E | [一細胞の遺伝型と表面タンパク質を比べる](tasks/E.md) | ブラウザと表計算ソフト |
+| F | [Creの配列認識と予測モデルの他生物への転用](tasks/F.md) | コーディングエージェント |
+| G | [Tet-Onの誘導応答と誘導前の発現を比べる](tasks/G.md) | コーディングエージェント |
+| H | [AAVカセットの注釈とWGS変異の照合](tasks/H.md) | コーディングエージェント |
+| I | [ガイドRNAの構造とCas9の活性を比べる](tasks/I.md) | コーディングエージェント |
 
-## Session
+## 当日の流れ
 
-- **15:30–16:00** Choose a brief and confirm the question, the input table, and the output.
-- **16:00–17:00** Run the core analysis. Use a small slice of the study or the labeled exercise data specified in the brief.
-- **17:00** Share one figure or table, one observation, and the input fields needed to repeat the analysis with another dataset.
-- **17:00–18:00** Review the result with an instructor and try one extension if time permits.
+- **15:30–16:00** 課題を一つ選び、問い、使うデータ、作る図表を確認します。
+- **16:00–17:00** 論文の公開データを絞って解析します。模擬データを使う課題は、各ページの案内に従ってください。
+- **17:00** 図か表を一つ、そこから分かったこと、自分のデータで再現するのに必要な項目を共有します。
+- **17:00–18:00** 講師・補助員と結果を確認し、時間があれば発展課題に取り組みます。
 
-## Coding-agent workflow
+## コーディングエージェントの使い方
 
-For A, B, C, F, G, H, and I, start with the prompt in the brief. Ask the agent to inspect the published data and column names before writing code. Save the script or notebook, source accession or URL, chosen subset, and parameters beside your output. Check the denominators and manually trace at least one row to its source. Use public or clearly labeled synthetic inputs in this public repository and in agent prompts.
+A・B・C・F・G・H・Iは、各ページのプロンプト例から始めます。コードを書く前に、元データと列名を確認させます。集計の分母を確かめ、図表の値を一つ選んで元の行までたどります。結果と一緒に、スクリプトまたはノートブック、データの登録番号かURL、使った範囲と設定を保存してください。この公開リポジトリやプロンプトには、公開データか、模擬データと明記したものを使います。
 
-D and E use published displays and a spreadsheet. Both core exercises can start from the links or examples in their briefs.
-
-The tracks specify inputs and outputs for the workshop. Some extensions need instructor preparation, as noted in the individual briefs.
+D・Eは、課題ページにある公開図や記入例から始められます。一部の発展課題は講師によるデータの準備が必要です。

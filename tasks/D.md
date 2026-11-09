@@ -1,23 +1,21 @@
-# D · TAL1 regulatory predictions
+# D｜TAL1周辺の発現とクロマチンの予測を読む
 
-**Mode:** Browser · **Target:** a two-row comparison table and a screenshot of the locus.
+**進め方：** ブラウザ　**成果物：** 予測トラックの比較表（2行）と、座位のスクリーンショット
 
-## Question
+報告済みの挿入変異を入れると、TAL1周辺のどこで転写やクロマチンのアクセシビリティの予測が変わるでしょうか。
 
-Where do predicted accessibility and transcription change around the TAL1 locus after a published insertion?
+## 使う公開データ
 
-## Public inputs
-
-| Source | Record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [AlphaGenome paper](https://doi.org/10.1038/s41586-025-10014-0) and [official TAL1 walkthrough](https://www.alphagenomedocs.com/colabs/v1/example_analysis_workflow.html) | Jurkat upstream insertion and the rendered “Exploring individual variant outcomes” plot | Published example and predicted RNA-seq and DNase-seq differences |
-| [JBrowse AlphaGenome walkthrough](https://jbrowse.org/jb2/docs/tutorials/alphagenome/) | Precomputed browser tracks for the published TAL1 example | Optional pan and zoom |
-| [NCBI GEO GSE152506](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE152506) and [ssREAD ST002](https://bmblx.bmi.osumc.edu/ssread/spatial/ST002) | Chen et al. mouse-brain spatial transcriptomics | Optional browser-based spatial exercise shared with A |
+| [AlphaGenome論文](https://doi.org/10.1038/s41586-025-10014-0)・[TAL1の公式チュートリアル](https://www.alphagenomedocs.com/colabs/v1/example_analysis_workflow.html) | Jurkat細胞で報告された上流の挿入変異と「Exploring individual variant outcomes」の図 | RNA-seqとDNase-seqの予測差を読む |
+| [JBrowseのAlphaGenomeチュートリアル](https://jbrowse.org/jb2/docs/tutorials/alphagenome/) | TAL1の計算済み予測トラック | 必要に応じて表示範囲を動かす、または拡大する |
+| [NCBI GEO GSE152506](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE152506)・[ssREAD ST002](https://bmblx.bmi.osumc.edu/ssread/spatial/ST002) | Chenらのマウス脳の空間トランスクリプトーム | Aと共有する空間解析の題材 |
 
-## Core exercise
+## 変異配列と参照配列の予測差を比べる
 
-1. Open the rendered official walkthrough and find the Jurkat insertion and TAL1 transcription start site. Record the assembly, variant, and cell context shown.
-2. Read the alternate-minus-reference tracks for predicted RNA-seq and DNase-seq. Fill in a two-row table with **track**, **location of change**, and **direction of change**. Save the annotated panel or a screenshot.
-3. Mark each observation as a model prediction. If the browser tracks are unavailable, use the plot already displayed in the official walkthrough. The core exercise uses the rendered result and requires no account or API key.
+1. 公式チュートリアルを開き、Jurkat細胞で報告された挿入変異と、TAL1の転写開始点を探します。参照ゲノム、変異、予測に指定した細胞の種類を記録します。
+2. 変異配列の予測値から参照配列の予測値を引いた図を見ます。RNA-seqとDNase-seqについて、**トラック名・変化した場所・増減の向き**を表にします。図かスクリーンショットを保存します。
+3. 表には「モデル予測」と明記します。JBrowseのトラックが開けなければ、公式チュートリアルの図を使います。この課題はアカウントやAPIキーを用意せずに進められます。
 
-**Spatial alternative:** Open one published mouse section in the linked viewer or use an instructor-provided export of one section. Plot or inspect one plaque-associated gene. Compare near and far spots only when plaque labels are present. Record the section and gene used.
+**空間解析を選ぶ場合**　リンク先のビューアでマウス脳の切片を一枚開くか、講師が用意した一枚分のデータを使います。プラーク関連遺伝子を一つ選んで発現の分布を見ます。プラークの位置が注釈されていれば、近傍と遠方のspotを比較します。使った切片と遺伝子を記録してください。

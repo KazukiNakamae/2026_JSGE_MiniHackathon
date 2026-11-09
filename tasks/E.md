@@ -1,33 +1,29 @@
-# E · Single-cell genotype and protein phenotype
+# E｜一細胞の遺伝型と表面タンパク質を比べる
 
-**Mode:** Browser and spreadsheet · **Target:** one group summary and a short interpretation of a published panel.
+**進め方：** ブラウザと表計算ソフト　**成果物：** 遺伝型ごとの集計図と、論文図から読み取ったことを一文
 
-## Question
+[DemareeらのFigure 3b](https://www.nature.com/articles/s41467-021-21810-3)では、全細胞のCD33・CD34シグナルに、NPM1変異が検出された細胞を重ねています。同じ細胞のDNA変異と表面タンパク質の測定値をどう比べるか、この図から考えます。
 
-How can a DNA variant and a surface-protein phenotype be compared in the same cells? Use Figure 3b of [Demaree et al.](https://www.nature.com/articles/s41467-021-21810-3), which overlays NPM1-mutant cells on the CD33 and CD34 signals for all displayed cells.
+## 使う公開データ
 
-## Public data
-
-| Source | Record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [Demaree et al., Figure 3 and Source Data](https://www.nature.com/articles/s41467-021-21810-3) | Published panels and accompanying source file | Browser exercise and source inspection |
-| [NCBI BioProject PRJNA602320](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA602320) | Original DAb-seq reads | Study provenance |
-| [UniVI processed data catalog](https://univi.readthedocs.io/en/latest/reproducibility/datasets.html#aml-mosaic) | Zenodo record 22883601, `aml_mosaic_dabseq_adt.h5ad` | Optional instructor export of paired genotype and antibody values |
+| [DemareeらのFigure 3とSource Data](https://www.nature.com/articles/s41467-021-21810-3) | 論文図と元データ | ブラウザで図を読み、データの出典を確認する |
+| [NCBI BioProject PRJNA602320](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA602320) | DAb-seqの元リード | 論文データの登録先 |
+| [UniVIの処理済みデータ一覧](https://univi.readthedocs.io/en/latest/reproducibility/datasets.html#aml-mosaic) | Zenodo 22883601の `aml_mosaic_dabseq_adt.h5ad` | 発展課題で講師が遺伝型と抗体の測定値をCSVにするための入力 |
 
-## Core exercise
+## 論文図を読み、表計算で比率を求める
 
-1. Open Figure 3b and select one time point. Label the axes and identify the two overlays. The all-cell background includes the highlighted cells. Describe one pattern visible in the plot.
-2. Paste the synthetic example below into a spreadsheet. For each genotype call, calculate the fraction of cells with high CD34. Keep the no-call category separate. Make a bar chart and write the denominator for each bar.
-3. For a data-based extension, use an instructor-exported CSV from one processed DAb-seq sample with cell ID, sample ID, NPM1 call, CD33, and CD34. Filter to that sample, keep failed genotype calls separate, and compare marker distributions or use an instructor-specified marker threshold.
+1. Figure 3bから時点を一つ選び、軸と色が何を表すか確認します。背景の全細胞には、色で強調された変異細胞も含まれます。図から読み取った特徴を一つ書きます。
+2. 下の模擬データを表計算ソフトに貼り付けます。遺伝型の判定ごとに、CD34が高い細胞の割合を計算し、棒グラフにします。「判定不能」は独立した区分にし、棒ごとの分母も記載します。
+3. 実測データで進める場合は、講師が1試料分を切り出したCSVを使います。必要な列は細胞ID、試料ID、NPM1の判定、CD33、CD34です。判定不能を分けたうえで、マーカーの分布を比べるか、講師が指定した閾値で割合を求めます。
 
-### Synthetic practice counts
+### 練習用の模擬データ
 
-These counts illustrate the spreadsheet operation and are independent of the paper.
-
-| NPM1 call | CD34 high | CD34 low |
+| NPM1の判定 | CD34が高い細胞 | CD34が低い細胞 |
 | --- | ---: | ---: |
-| Variant detected | 3 | 7 |
-| Reference call | 6 | 4 |
-| No call | 1 | 3 |
+| 変異あり | 3 | 7 |
+| 参照型 | 6 | 4 |
+| 判定不能 | 1 | 3 |
 
-Bring the chart and one sentence about what the DNA assay measured. DAb-seq reads a targeted panel of genomic loci and measures surface proteins for the same cells.
+共有時には、棒グラフと、DNAの測定範囲を説明する一文を用意します。DAb-seqで読み取るDNAはパネルに含まれる座位で、表面タンパク質は同じ細胞から測定しています。

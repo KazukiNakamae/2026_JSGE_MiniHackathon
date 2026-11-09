@@ -1,27 +1,25 @@
-# G · Tet-On expression over time
+# G｜Tet-Onの誘導応答と誘導前の発現を比べる
 
-**Mode:** Coding agent · **Target:** separate plots for induced response and basal expression.
+**進め方：** コーディングエージェント　**成果物：** 誘導応答と誘導前の発現を示す図を一つずつ
 
-## Question
+30日後にもTet-Onの誘導応答が残るか、ドキシサイクリンを加えていないときにも発現が見られるかを、[Yanagiらの論文](https://doi.org/10.1186/s13036-025-00499-8)の元データで調べます。
 
-How do the published Tet-On conditions compare for expression after 30 days and for expression without doxycycline? Replot the relevant panels in [Yanagi et al.](https://doi.org/10.1186/s13036-025-00499-8).
+## 使う公開データ
 
-## Public data
-
-| Source | File or record | Use |
+| 取得先 | ファイル・データ | 用途 |
 | --- | --- | --- |
-| [Yanagi et al. and supplemental source data](https://link.springer.com/article/10.1186/s13036-025-00499-8) | Figure 2H and Figure 4A source data | Late inducibility and basal expression in their respective comparisons |
-| [Published rtTA variant study](https://doi.org/10.1016/S0014-5793%2802%2902587-5) | Reported dose-response panels | Alternative if the focus is the transactivator |
-| [Meir et al., Figure 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3078864/) and [Tol2 genomic insertion supplement](https://doi.org/10.1186/1471-2164-10-418) | piggyBac and Tol2 reference comparison, plus Tol2 flanking sequences and target-site counts | Transposon alternative |
+| [Yanagiらの論文と補足資料](https://link.springer.com/article/10.1186/s13036-025-00499-8) | Figure 2HとFigure 4Aの元データ | 30日後の誘導応答と、誘導前の発現をそれぞれ比較 |
+| [rtTA変異体の研究](https://doi.org/10.1016/S0014-5793%2802%2902587-5) | 報告済みの用量反応曲線 | rtTAの違いを調べる場合に使用 |
+| [MeirらのFigure 5](https://pmc.ncbi.nlm.nih.gov/articles/PMC3078864/)・[Tol2のゲノム挿入に関する補足資料](https://doi.org/10.1186/1471-2164-10-418) | piggyBacとTol2の比較、Tol2挿入点の周辺配列と集計 | トランスポゾンを調べる場合に使用 |
 
-## Core exercise
+## 二つの図を、元の対照と単位で描き直す
 
-1. Extract the reported day-30 induced-response values and the basal-expression values for the stated groups. Record doxycycline status, condition, time point, unit, replicate, and figure panel.
-2. Plot the two comparisons separately with their original units and controls. Calculate within-panel differences or ratios only where the underlying values support them.
-3. State whether the same groups were compared across panels and identify which measurement addresses expression persistence and which addresses leak.
+1. 30日後の誘導応答と、誘導前の発現の値を拾います。ドキシサイクリンの有無、群、時点、単位、反復、図のパネル番号を記録します。
+2. それぞれの対照と単位を保ち、図を二つ作ります。差や比は、元の値から計算できる場合に同じパネルの中で求めます。
+3. 二つの図で比較した群が同じかを確認します。どちらの測定が誘導応答の維持を、どちらが誘導前の発現を示すかを説明します。
 
-**Agent prompt**
+**プロンプト例**
 
-> Read the paper and source data for Figures 2H and 4A. Show the condition and unit mapping first. Then produce two labeled plots and link each value to the correct panel.
+> Figure 2HとFigure 4Aの元データを読み、条件と単位の対応を先に示してください。比較図を二つ作り、各値がどのパネルに由来するか記録してください。
 
-**Alternatives:** Compare published rtTA dose-response curves, or recreate a Tol2 motif logo from the public insertion supplement and compare it with the published piggyBac TTAA pattern. Record the source, organism, and background for each motif. [Evo 2](https://doi.org/10.1038/s41586-026-10176-5) provides a separate chromatin-design example. Use the Tet-On measurements to evaluate persistence and leak in this exercise.
+**別の題材**　rtTAの用量反応曲線を比べるか、公開された挿入データからTol2のsequence logoを作り、報告済みのpiggyBacのTTAAパターンと比べます。配列を比べるときは、出典、対象生物、比較に使った背景配列を記録してください。[Evo 2](https://doi.org/10.1038/s41586-026-10176-5)にはクロマチンを対象にした配列設計の例があります。この課題ではTet-Onの実測値から誘導応答と誘導前の発現を評価します。
