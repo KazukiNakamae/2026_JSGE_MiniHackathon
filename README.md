@@ -7,12 +7,12 @@ A〜Iのページは、皆さんが挙げた関心をもとにした提案です
 | A | [マウスの発現解析・ノックイン設計・Off-target解析](tasks/A.md) |
 | B | [Off-target予測モデルの作成とソフトウェア比較](tasks/B.md) |
 | C | [AAV挿入・ヌクレアーゼのoff-target・リン酸化プロテオーム解析](tasks/C.md) |
-| D | [TAL1周辺の発現とクロマチンの予測を読む](tasks/D.md) |
+| D | [AlphaGenomeとSpatial Transcriptomics](tasks/D.md) |
 | E | [一細胞の遺伝型と表面タンパク質を比べる](tasks/E.md) |
-| F | [Creの配列認識と予測モデルの他生物への転用](tasks/F.md) |
-| G | [Tet-Onの誘導応答と誘導前の発現を比べる](tasks/G.md) |
-| H | [AAVカセットの注釈とWGS変異の照合](tasks/H.md) |
-| I | [ガイドRNAの構造とCas9の活性を比べる](tasks/I.md) |
+| F | [LSR–DNA構造・組換え酵素の配列認識・予測モデルの種間転用](tasks/F.md) |
+| G | [Tet-Onのサイレンシング・クロマチン設計・rtTA・トランスポゾン](tasks/G.md) |
+| H | [AAV vector・FVIIIとFIXのタンパク質工学・ゲノム編集後のWGS](tasks/H.md) |
+| I | [gRNAの配列とCasの機能・Cas9のアミノ酸置換](tasks/I.md) |
 
 ## 当日の時間の使い方
 
