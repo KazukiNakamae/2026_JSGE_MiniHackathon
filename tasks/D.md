@@ -1,27 +1,19 @@
-# D｜TAL1周辺の発現とクロマチンの予測を読む
+# D｜AlphaGenomeとSpatial Transcriptomics
 
-AlphaGenomeの公開図をブラウザで読む案です。マウス脳の空間解析も題材になります。
+公開トラックや組織切片をブラウザで見比べる提案です。どちらも、まず見たい変化を講師・補助員と話すところから始められます。
 
-**使える方法**　ブラウザ　**まとめ方の例**　予測トラックの比較表（2行）と、座位のスクリーンショット
+## D1｜AlphaGenomeのTAL1予測とChIP-seq実測を照合する
 
-報告済みの挿入変異を入れると、TAL1周辺のどこで転写やクロマチンのアクセシビリティの予測が変わるでしょうか。
+**相談のきっかけ**　「TAL1の上流に挿入があるとき、何が変わると予測されるか。実測ではどの位置にシグナルがあるか。」
 
-## まず、やりたいことを伝えるときの例
+**参考論文と取得先**　Mansourらは、Jurkat細胞のTAL1上流にある挿入と、その周辺のH3K27acやMYBを調べました。GEOにはJurkatのH3K27ac ChIP-seqの処理済みWIGと元リードがあります。AlphaGenome側は、同じ挿入を使った公式チュートリアルと、JBrowseに保存された予測を参照できます。[Mansour et al. (2014)](https://pmc.ncbi.nlm.nih.gov/articles/PMC4720521/) · [GEO GSE59657](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE59657) · [Jurkat H3K27ac GSM1519642](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1519642) · [AlphaGenome論文](https://doi.org/10.1038/s41586-025-10014-0) · [公式チュートリアル](https://www.alphagenomedocs.com/colabs/v1/example_analysis_workflow.html) · [JBrowseの計算済みトラック](https://jbrowse.org/jb2/docs/tutorials/alphagenome/)
 
-「TAL1周辺で変化する予測トラックを見たい」「マウス脳の切片で発現の分布を見たい」といった関心を、講師・補助員と話すところから始める方法があります。
+**再解析の案**　TAL1の転写開始点と挿入位置を目印に、予測図でRNA-seq、DNase-seq、H3K27acの変化を見ます。実測は、GEOのH3K27acトラックを対応する参照ゲノムで表示するか、原著の同じ座位のパネルを見ます。モデルの予測差（変異配列と参照配列の差）とJurkatの実測シグナルを別々に記録し、H3K27acの位置関係を比べる案です。予測の細胞種はCD34陽性の骨髄系前駆細胞で、Jurkatの実測とは条件が異なります。トラックごとに細胞種、ゲノム版、測定か予測かを添えると比較できます。
 
-## 参考にできる公開データ
+## D2｜マウス脳のSpatial Transcriptomicsを切片上で見る
 
-| 取得先 | ファイル・データ | 用途 |
-| --- | --- | --- |
-| [AlphaGenome論文](https://doi.org/10.1038/s41586-025-10014-0)・[TAL1の公式チュートリアル](https://www.alphagenomedocs.com/colabs/v1/example_analysis_workflow.html) | Jurkat細胞で報告された上流の挿入変異と「Exploring individual variant outcomes」の図 | RNA-seqとDNase-seqの予測差を読む |
-| [JBrowseのAlphaGenomeチュートリアル](https://jbrowse.org/jb2/docs/tutorials/alphagenome/) | TAL1の計算済み予測トラック | 必要に応じて表示範囲を動かす、または拡大する |
-| [NCBI GEO GSE152506](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE152506)・[ssREAD ST002](https://bmblx.bmi.osumc.edu/ssread/spatial/ST002) | Chenらのマウス脳の空間トランスクリプトーム | Aと共有する空間解析の題材 |
+**相談のきっかけ**　「マウス脳の切片で、プラークに関連する遺伝子がどこで発現するか見てみたい。」
 
-## 変異配列と参照配列の予測差を読む手順例
+**参考論文と取得先**　Chenらは、アルツハイマー病モデルのマウスで、アミロイドプラーク周辺の発現を調べました。GEOにspot別の発現カウントと元リードがあります。例えば `GSM4647075` はAPP<sup>NL-G-F</sup>の切片です。AlzMapとssREADにも切片の情報があります。[Chen et al. (2020)](https://doi.org/10.1016/j.cell.2020.06.038) · [GEO GSE152506](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE152506) · [切片 GSM4647075](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM4647075) · [AlzMap](https://alzmap.org/) · [ssREAD ST002](https://bmblx.bmi.osumc.edu/ssread/spatial/ST002)
 
-1. 公式チュートリアルを開き、Jurkat細胞で報告された挿入変異と、TAL1の転写開始点を探します。参照ゲノム、変異、予測に指定した細胞の種類を記録します。
-2. 変異配列の予測値から参照配列の予測値を引いた図を見ます。RNA-seqとDNase-seqについて、**トラック名・変化した場所・増減の向き**を表にします。図かスクリーンショットを保存します。
-3. 表には「モデル予測」と明記します。JBrowseのトラックが開けなければ、公式チュートリアルの図を使います。この課題はアカウントやAPIキーを用意せずに進められます。
-
-**空間解析の案**　リンク先のビューアでマウス脳の切片を一枚開くか、講師が用意した一枚分のデータを使います。プラーク関連遺伝子を一つ選んで発現の分布を見ます。プラークの位置が注釈されていれば、近傍と遠方のspotを比較します。切片と遺伝子を記録しておくと、あとから同じ表示を確認できます。
+**再解析の案**　公開ビューアまたは講師・補助員と開いた公開切片で、例えば `Cst7` の発現を組織上に表示します。同じ切片でプラークの注釈を確認できる場合は、同じ脳領域の近傍と遠方で、発現が高いspotの分布を見比べられます。表示できる切片が限られる場合は、論文の切片画像と公開発現マップで領域と遺伝子を照合する案もあります。切片ID、遺伝子、色の尺度を記録すると、同じ表示を見直せます。
