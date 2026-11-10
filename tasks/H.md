@@ -1,34 +1,43 @@
-# H｜AAVカセットの注釈とWGS変異の照合
+# H｜AAV vector・FVIIIとFIXのタンパク質工学・ゲノム編集後のWGS
 
-既報のAAVカセットを注釈する案と、WGSの変異を照合する案です。
+AAVの配列設計、凝固因子の構造と活性、編集マウスのWGSを、公開データから調べる提案です。その後のプロンプトは、直前の結果と[共通の進め方の例](../README.md#agent-workflow)を参考に考えられます。
 
-**使える方法**　コーディングエージェント　**まとめ方の例**　カセットのサイズ比較図か、ゲノム座標で変異を照合した表
+## H1｜AAVカセットの構成とpackaging後の配列を比べる
 
-## まず、やりたいことを伝えるときの例
+**まず、やりたいことを伝えるときの例**
 
-調べたいことをコーディングエージェントに伝えるときの例です。
+> 報告済みのFVIII用AAVカセットの長さを要素ごとに比べたいです。packaging後のリードで、設計どおりの長さの分子をどう見分けるかも知りたいです。
 
-> 報告済みのFVIIIカセットで、ITR、発現調節配列、コード領域がそれぞれどのくらいの長さか比べたいです。
+**参考論文と取得先**　McIntoshらの論文には短縮したFVIIIを載せたAAVの設計例があり、RefSeqの `NM_000132.4` からヒト全長F8のCDSを取得できます。packaging後を調べる実データには、CuiらがAAV2とAAV2.7m8を比較したlong-readデータがあります。こちらのカセットはEGFPまたはfirefly luciferaseです。[FVIII用AAVの論文](https://pmc.ncbi.nlm.nih.gov/articles/PMC3637010/) · [RefSeq NM_000132.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000132.4) · [Cuiらのpackaging研究](https://pmc.ncbi.nlm.nih.gov/articles/PMC11600122/) · [SRA PRJNA1127696](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1127696)
 
-WGSを選ぶ場合
+**再解析の案**　FVIIIカセットの図と論文記載の長さから、ITR、発現調節配列、CDS、poly(A)シグナルの内訳を描きます。全長F8のCDSと比べると、短縮による差を示せます。長さの記載がない要素は、図で未確定とします。実測リードを使う場合は、同じssAAV-CB6-EgfpカセットのAAV2とAAV2.7m8のRunを選び、リード長の分布を比較します。対応するcis-plasmidの参照配列が入手できれば、coverageを表示して、Figure 3cのIGV図にある欠落や途切れを照合できます。FVIII用カセットの長さの比較と、EGFPカセットのpackagingの実測は分けて扱います。
 
-> 編集マウスのWGSで、予測したoff-target座位にどんな変異コールがあるか照合したいです。
+## H2｜FVIIIの工学的改変を実測構造に重ねる
 
-その後の依頼を考えるときは、直前の結果や[共通の進め方の例](../README.md#agent-workflow)が参考になります。
+**まず、やりたいことを伝えるときの例**
 
-## 参考にできる公開データ
+> ヒトFVIIIと、分泌や活性の改善が報告されたFVIIIの構造を比較し、改変された領域を見たいです。
 
-| 取得先 | ファイル・データ | 用途 |
-| --- | --- | --- |
-| [McIntoshらの論文と補足資料](https://pmc.ncbi.nlm.nih.gov/articles/PMC3637010/) | 報告済みの短縮型FVIIIカセット | カセット各要素の注釈 |
-| [RefSeq F8 NM_000132.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000132.4)・[RefSeq F9 NM_000133.4](https://www.ncbi.nlm.nih.gov/nuccore/NM_000133.4) | バージョンを指定した参照配列 | コード領域の長さと位置番号 |
-| [FIX-Paduaの研究](https://pubmed.ncbi.nlm.nih.gov/31219805/)・[BryantらのAAV2データ](https://github.com/alibashir/aav) | 活性の図とカプシドのpackaging測定値 | タンパク質やカプシドを選ぶ場合に使用 |
-| [PetersonらのSupplementary Data 1、3、5](https://doi.org/10.1038/s42003-023-04974-0) | 予測候補座位、変異コール、図の元データ | WGSでの照合 |
-| [NCBI BioProject PRJNA687003](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA687003)・[EVA PRJEB61387](https://www.ebi.ac.uk/eva/?eva-study=PRJEB61387) | WGS・CIRCLE-seqの元リードと一次フィルタ済みVCF | データの登録先と発展解析 |
+**参考論文と取得先**　ET3iはBドメインを除いたヒト・ブタのキメラFVIIIです。ET3iの結晶構造と、論文中で比較したヒトFVIIIの再精密化構造をPDBから取得できます。関連研究にはET3とヒト由来の短縮型FVIII（HSQ）の活性や発現の測定値があります。[ET3iの構造論文](https://pmc.ncbi.nlm.nih.gov/articles/PMC6940532/) · [PDB 6MF0](https://www.rcsb.org/structure/6MF0) · [PDB 6MF2](https://www.rcsb.org/structure/6MF2) · [ET3とHSQの活性・発現比較](https://pmc.ncbi.nlm.nih.gov/articles/PMC4362354/)
 
-## カセット注釈とWGS照合の進め方の例
+**再解析の案**　対応するドメインを重ね、ブタ由来の領域とC2ドメインの向きを表示し、原著の重ね合わせ図の一部を再現できます。比較する残基をそろえ、座標のない領域は図に注記します。活性も扱うなら、同じアッセイで測ったET3とHSQの値を別の図にして、構造の差と活性の差を並べます。
 
-- **AAV・FVIII**　報告済みのFVIIIカセットを一つ選び、ITR、発現調節配列、コード領域の長さを図にします。比較用に全長F8のコード領域を添え、長さが分からない要素にはその旨を記載します。別の切り口としては、FIX-Paduaの活性をFVIIIaの有無で比較するか、AAV2の配列の違いとpackagingの実測値の関係を描きます。
-- **ゲノム編集・WGS**　論文のガイド1本かfounder 1個体を選び、mm10上で予測座位とWGSの変異コールを照合します。意図した標的、変異コールが一致した予測off-target座位、判定がつかない座位を分けます。照合に使った座標範囲とVCF・BEDの座標の数え方を記録し、利用できる場合は未処置群との比較も確認します。
+## H3｜FIX PaduaとR338の置換を比較する
 
-**テストで確かめられること**　カセットを選んだ場合は、長さの単位と内訳の合計を確かめます。WGSを選んだ場合は、一致する座位と一致しない座位を一つずつ用意し、座標の照合結果を手で確かめます。
+**まず、やりたいことを伝えるときの例**
+
+> FIX Paduaの置換位置を実測構造で見たいです。同じ位置のほかの置換と比べて、比活性がどう違うかも調べたいです。
+
+**参考論文と取得先**　FIXのR338を各アミノ酸に置換した研究に、同一部位の置換と比活性の比較があります。原著が位置の説明に使った野生型FIXaのプロテアーゼ領域はPDBで取得できます。Padua（R338L）と野生型をFVIIIaの条件別に比較した研究も参照できます。[R338置換スキャンの論文](https://pmc.ncbi.nlm.nih.gov/articles/PMC7948292/) · [PDB 1RFN](https://www.rcsb.org/structure/1RFN) · [FVIIIa依存性を調べた論文](https://pmc.ncbi.nlm.nih.gov/articles/PMC6675543/)
+
+**再解析の案**　成熟FIXのR338をPDBの残基番号に対応させ、野生型構造上で位置を表示します。原著のR338置換スキャンから、野生型、R338L、ほかの置換の比活性を描き直す案です。図から読み取った値には出典を記録します。FVIIIaの有無で差がどう変わるかを扱う場合は、別研究の同一パネル内で比較します。
+
+## H4｜編集マウスのWGSでon-targetとoff-targetを照合する
+
+**まず、やりたいことを伝えるときの例**
+
+> Cas9で編集したマウスのWGSを使って、on-targetの変化と、予測off-target座位に重なる変異を区別して調べたいです。
+
+**参考論文と取得先**　Petersonらの編集マウスと未処置マウスの比較では、WGSとCIRCLE-seqの元リードをSRA、一次フィルタ済みVCFをEVAから取得できます。Supplementary Data 1にはガイド、Data 3には候補座位に重なった変異と検証情報、Data 5には図の元データがあります。[Peterson et al. (2023)](https://doi.org/10.1038/s42003-023-04974-0) · [SRA PRJNA687003](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA687003) · [EVA PRJEB61387](https://www.ebi.ac.uk/eva/?eva-study=PRJEB61387) · [著者の解析コード](https://github.com/The-Centre-for-Phenogenomics/Cas9-WGS)
+
+**再解析の案**　編集個体を一つ選び、mm10上のon-target範囲と予測off-target範囲を、一次フィルタ済みVCFに照合する案です。VCFとBEDの座標規則をそろえ、編集個体だけに見えるものと対照にもあるものを区別し、Data 3の報告と比較します。元リードを扱うなら、対象座位周辺のアラインメントを表示してread depthとalt支持を確認できます。予測座位と重なった変異、原著で確認された変異、カバレッジが足りない座位は、結果表で区別します。
